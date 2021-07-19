@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #ca6;
+    background-color: #b9b9c9;
 }
 table {
     font-family: verdana;
@@ -16,14 +16,14 @@ td#tdLinks {
 td#tdGame {
     text-align: center;
 }
-tr#trColorPicker td{
-    border-radius:50px;
+tr#trColorPicker td {
+    border-radius: 50px;
 }
 div#divAnimate {
     display: none;
     position: absolute;
     border: outset 3px #f1f1f1;
-    border-radius:50px;
+    border-radius: 50px;
     filter: shadow;
 }
 div.link {
@@ -68,31 +68,31 @@ td.picker {
     border: outset 3px;
 }
 td.guess {
-	height: 44px;
+    height: 44px;
     width: 40px;
     border: inset 2px silver;
     font-size: 1pt;
-    border-radius:40px;
-    background-color:#000;
+    border-radius: 40px;
+    background-color: #000;
 }
-td.guess.hasColor{
-    border-color:#ca6;
-    border-style:outset;
+td.guess.hasColor {
+    border-color: #ca6;
+    border-style: outset;
 }
 td.guess.editing {
-    background-color:#997;
+    background-color: #997;
 }
 table#markTable {
-    width: 50px;    
+    width: 50px;
 }
 td.mark {
-	height:20px;
+    height: 20px;
     border: outset 2px #ca6;
     font-size: 1pt;
     border-radius: 20px;
 }
-span.spnArrow{
-    font-family:"Arial Black";
+span.spnArrow {
+    font-family: 'Arial Black';
     font-weight: bold;
     color: darkblue;
     display: none;
@@ -106,7 +106,7 @@ button.btnMark {
     visibility: hidden;
     border-radius: 5px;
 }
-button.btnMark:hover{
+button.btnMark:hover {
     border-style: outset;
     color: blue;
 }

@@ -1,4 +1,13 @@
-var colors = ['#ffff00', '#0000aa', '#ff0000', '#ff00ff', '#00aa00', '#ff8833', '#ffffff', '#8888ff'];
+var colors = [
+    '#ffff00',
+    '#0000aa',
+    '#ff0000',
+    '#ff00ff',
+    '#00aa00',
+    '#ff8833',
+    '#ffffff',
+    '#8888ff',
+];
 function getMarkers(tr) {
     var i,
         color,
@@ -203,6 +212,18 @@ $(document).ready(function () {
         $(this).text(index + 1);
     });
     $('.guess').click(clear);
+    
+    $('#cbAutomaticMarking')
+        .attr('checked', !!localStorage.getItem('autoMark') ? 'checked' : '')
+        .change(() =>
+            localStorage.setItem('autoMark', $('#cbAutomaticMarking:checked').length > 0 ? 'true' : '')
+        );
+    $('#cbUniqueColors')
+        .attr('checked', !!localStorage.getItem('uniqueColors') ? 'checked' : '')
+        .change(() =>
+            localStorage.setItem('uniqueColors', $('#cbUniqueColors:checked').length ? 'true' : '')
+        );
+
     $('tr:has(td.guess)')
         .find('.btnMark')
         .click(function () {
