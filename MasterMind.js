@@ -54,7 +54,9 @@ function markRow(tr) {
         matches = 0;
     if (markers.whites) {
         for (; matches < markers.whites; matches++) {
-            $(tr).find('.mark').eq(matches).css('background-image', 'url(Images/WhiteMark.png)');
+            $(tr).find('.mark').eq(matches).css({
+                'background-color': '#fff',
+            });
         }
         if (markers.whites == $('.selectedColor').length) {
             //win game
@@ -66,7 +68,9 @@ function markRow(tr) {
     }
     if (markers.blacks) {
         for (; matches < markers.whites + markers.blacks; matches++) {
-            $(tr).find('.mark').eq(matches).css('background-image', 'url(Images/BlackMark.png)');
+            $(tr).find('.mark').eq(matches).css({
+                'background-color': '#000',
+            });
         }
     }
     $(tr).find('.spnArrow').hide();
@@ -104,7 +108,6 @@ function selectColor(tdColor) {
                 $(td)
                     .css('background-image', $('#divAnimate').css('background-image'))
                     .removeClass('editing')
-                    .addClass('hasColor')
                     .data('hasColor', true);
                 $(tr)
                     .children('.guess')
@@ -137,12 +140,12 @@ function generateColors() {
     });
 }
 function newGame() {
-    $('.guess, .mark').css('background-image', '');
+    $('.guess, .mark').css('background-color', '#ddd');
     $('.guess')
         .removeClass('editing')
         .removeClass('found')
-        .removeClass('hasColor')
-        .data('hasColor', false);
+        .data('hasColor', false)
+        .css({ 'background-image': '', 'background-color': '' });
     $('.btnMark').css('visibility', 'hidden');
     $('.spnArrow').hide().eq(0).show();
     $('.guess:eq(0)').addClass('editing');
@@ -164,7 +167,7 @@ function clear() {
                     break;
                 }
             }
-            $(td).css('background-image', '').data('hasColor', false).removeClass('hasColor');
+            $(td).css('background-image', '').data('hasColor', false);
             $('#divAnimate')
                 .css({
                     'background-image': $(matchingPicker).css('background-image'),
@@ -212,11 +215,14 @@ $(document).ready(function () {
         $(this).text(index + 1);
     });
     $('.guess').click(clear);
-    
+
     $('#cbAutomaticMarking')
         .attr('checked', !!localStorage.getItem('autoMark') ? 'checked' : '')
         .change(() =>
-            localStorage.setItem('autoMark', $('#cbAutomaticMarking:checked').length > 0 ? 'true' : '')
+            localStorage.setItem(
+                'autoMark',
+                $('#cbAutomaticMarking:checked').length > 0 ? 'true' : ''
+            )
         );
     $('#cbUniqueColors')
         .attr('checked', !!localStorage.getItem('uniqueColors') ? 'checked' : '')

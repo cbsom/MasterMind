@@ -22,9 +22,6 @@ tr#trColorPicker td {
 div#divAnimate {
     display: none;
     position: absolute;
-    border: outset 3px #f1f1f1;
-    border-radius: 50px;
-    filter: shadow;
 }
 div.link {
     font-size: 10pt;
@@ -70,21 +67,21 @@ div.popup {
     width: 50px;
     font-size: 1pt;    
 }
-.guess.hasColor {
-    
-}
 .guess.editing {
     background-color: #ddd;
     border-radius:10px;
 }
-table#markTable {
+#markTable {
     width: 50px;
+    margin-left: 30px;;
 }
 .mark {
     height: 20px;
     border: outset 1px;
     font-size: 1pt;
     border-radius: 50px;
+    border-color: #bbb;
+    background-color: #ddd;
 }
 span.spnArrow {
     font-family: 'Arial Black';
