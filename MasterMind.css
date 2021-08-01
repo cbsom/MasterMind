@@ -55,7 +55,7 @@ div.popup {
     text-align: center;
     border-radius: 10px;
 }
-td.selectedColor {
+.selectedColor {
     height: 60px;
     width: 60px;
     border: inset 1px silver;
@@ -67,7 +67,7 @@ td.picker {
     border: solid 2px silver;
     border: outset 3px;
 }
-td.guess {
+.guess {
     height: 44px;
     width: 40px;
     border: inset 2px silver;
@@ -75,17 +75,17 @@ td.guess {
     border-radius: 40px;
     background-color: #000;
 }
-td.guess.hasColor {
+.guess.hasColor {
     border-color: #ca6;
     border-style: outset;
 }
-td.guess.editing {
+.guess.editing {
     background-color: #997;
 }
 table#markTable {
     width: 50px;
 }
-td.mark {
+.mark {
     height: 20px;
     border: outset 2px #ca6;
     font-size: 1pt;

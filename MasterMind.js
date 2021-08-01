@@ -71,7 +71,7 @@ function markRow(tr) {
     }
     $(tr).find('.spnArrow').hide();
     $(tr).next().find('.spnArrow').show();
-    $(tr).next().children('td.guess:first').addClass('editing');
+    $(tr).next().children('td.guess').eq(0).addClass('editing');
     if (!$('.editing').length) {
         // no rows left - lose game
         $('#divSelectedColors').show('slow');
@@ -206,7 +206,7 @@ $(document).ready(function () {
         );
     }
     for (i = 0; i < 9; i++) {
-        $('#guessTable').append($('#guessTable tr:first').clone());
+        $('#guessTable').append($('#guessTable tr').eq(0).clone());
     }
     $('.tdRowNumber').each(function (index) {
         $(this).text(index + 1);
