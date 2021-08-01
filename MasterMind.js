@@ -1,12 +1,12 @@
 var colors = [
-    '#ffff00',
-    '#0000aa',
-    '#ff0000',
-    '#ff00ff',
-    '#00aa00',
-    '#ff8833',
-    '#ffffff',
-    '#8888ff',
+    'url(Images/Yellow.png)',
+    'url(Images/Red.png)',
+    'url(Images/Blue.png)',
+    'url(Images/Grey.png)',
+    'url(Images/Purple.png)',
+    'url(Images/Green.png)',
+    'url(Images/Black.png)',
+    'url(Images/Orange.png)',
 ];
 function getMarkers(tr) {
     var i,
@@ -22,7 +22,7 @@ function getMarkers(tr) {
                     !$(color).hasClass('found') &&
                     !$(this).hasClass('found') &&
                     i == index &&
-                    $(this).css('background-color') == $(color).css('background-color')
+                    $(this).css('background-image') == $(color).css('background-image')
                 ) {
                     whites++;
                     $(this).addClass('found');
@@ -38,7 +38,7 @@ function getMarkers(tr) {
                 if (
                     !$(color).hasClass('found') &&
                     !$(this).hasClass('found') &&
-                    $(this).css('background-color') == $(color).css('background-color')
+                    $(this).css('background-image') == $(color).css('background-image')
                 ) {
                     blacks++;
                     $(this).addClass('found');
@@ -54,7 +54,7 @@ function markRow(tr) {
         matches = 0;
     if (markers.whites) {
         for (; matches < markers.whites; matches++) {
-            $(tr).find('.mark').eq(matches).css('background-color', '#ffffff');
+            $(tr).find('.mark').eq(matches).css('background-image', 'url(Images/WhiteMark.png)');
         }
         if (markers.whites == $('.selectedColor').length) {
             //win game
@@ -66,12 +66,12 @@ function markRow(tr) {
     }
     if (markers.blacks) {
         for (; matches < markers.whites + markers.blacks; matches++) {
-            $(tr).find('.mark').eq(matches).css('background-color', '#000000');
+            $(tr).find('.mark').eq(matches).css('background-image', 'url(Images/BlackMark.png)');
         }
     }
     $(tr).find('.spnArrow').hide();
     $(tr).next().find('.spnArrow').show();
-    $(tr).next().children('td.guess').eq(0).addClass('editing');
+    $(tr).next().children('.guess').eq(0).addClass('editing');
     if (!$('.editing').length) {
         // no rows left - lose game
         $('#divSelectedColors').show('slow');
@@ -84,7 +84,7 @@ function selectColor(tdColor) {
     if (!$(td).length) return;
     $('#divAnimate')
         .css({
-            'background-color': $(tdColor).css('background-color'),
+            'background-image': $(tdColor).css('background-image'),
             width: $(tdColor).width(),
             height: $(tdColor).height(),
             top: $(tdColor).offset().top,
@@ -102,7 +102,7 @@ function selectColor(tdColor) {
             function () {
                 $('#divAnimate').css('display', 'none');
                 $(td)
-                    .css('background-color', $('#divAnimate').css('background-color'))
+                    .css('background-image', $('#divAnimate').css('background-image'))
                     .removeClass('editing')
                     .addClass('hasColor')
                     .data('hasColor', true);
@@ -133,11 +133,11 @@ function generateColors() {
             color = colors[parseInt((Math.random() * 10) % colors.length)];
         }
         gameColors.push(color);
-        $(this).css('background-color', color);
+        $(this).css('background-image', color);
     });
 }
 function newGame() {
-    $('.guess, .mark').css('background-color', '');
+    $('.guess, .mark').css('background-image', '');
     $('.guess')
         .removeClass('editing')
         .removeClass('found')
@@ -159,15 +159,15 @@ function clear() {
     if (tdEdit.length || $(btnMark).css('visibility') == 'visible') {
         if ($(td).data('hasColor')) {
             for (i = 0; i < $('.picker').length; i++) {
-                if ($(td).css('background-color') == $('.picker').eq(i).css('background-color')) {
+                if ($(td).css('background-image') == $('.picker').eq(i).css('background-image')) {
                     matchingPicker = $('.picker').eq(i);
                     break;
                 }
             }
-            $(td).css('background-color', '').data('hasColor', false).removeClass('hasColor');
+            $(td).css('background-image', '').data('hasColor', false).removeClass('hasColor');
             $('#divAnimate')
                 .css({
-                    'background-color': $(matchingPicker).css('background-color'),
+                    'background-image': $(matchingPicker).css('background-image'),
                     width: $(td).width(),
                     height: $(td).height(),
                     top: $(td).offset().top,
@@ -184,13 +184,13 @@ function clear() {
                     500,
                     function () {
                         $('#divAnimate').css('display', 'none');
-                        $(tdEdit).removeClass('editing').css('background-color', '');
+                        $(tdEdit).removeClass('editing').css('background-image', '');
                         $(btnMark).css('visibility', 'hidden');
                         $(td).addClass('editing');
                     }
                 );
         } else {
-            $(tdEdit).removeClass('editing').css('background-color', '');
+            $(tdEdit).removeClass('editing').css('background-image', '');
             $(btnMark).css('visibility', 'hidden');
             $(td).addClass('editing');
         }
@@ -200,7 +200,7 @@ $(document).ready(function () {
     var i, tdEdit;
     for (i = 0; i < colors.length; i++) {
         $('#trColorPicker').append(
-            '<td style="background-color:' +
+            '<td style="background-image:' +
                 colors[i] +
                 '" onclick="selectColor(this);" class="picker">&nbsp;</td>'
         );
