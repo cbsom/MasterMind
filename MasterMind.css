@@ -1,4 +1,7 @@
-﻿*{background-size:contain;background-repeat:no-repeat;}
+﻿* {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 body {
     background-color: #fefefe;
 }
@@ -52,6 +55,10 @@ div.popup {
     text-align: center;
     border-radius: 10px;
 }
+.divOptions p {
+    text-align: left;
+    margin-bottom: 15px;
+}
 .selectedColor {
     height: 60px;
     width: 60px;
@@ -60,20 +67,20 @@ div.popup {
 .picker {
     height: 100px;
     width: 100px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 .guess {
     height: 50px;
     width: 50px;
-    font-size: 1pt;    
+    font-size: 1pt;
 }
 .guess.editing {
     background-color: #ddd;
-    border-radius:10px;
+    border-radius: 10px;
 }
 #markTable {
     width: 50px;
-    margin-left: 30px;;
+    margin-left: 30px;
 }
 .mark {
     height: 20px;

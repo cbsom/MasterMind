@@ -1,18 +1,24 @@
-var colors = [
-    'url(Images/Yellow.png)',
-    'url(Images/Red.png)',
-    'url(Images/Blue.png)',
-    'url(Images/Grey.png)',
-    'url(Images/Purple.png)',
-    'url(Images/Green.png)',
-    'url(Images/Black.png)',
-    'url(Images/Orange.png)',
-];
+function getColors() {
+    const colorsToChooseFrom = [
+        'url(Images/Yellow.png)',
+        'url(Images/Red.png)',
+        'url(Images/Blue.png)',
+        'url(Images/Purple.png)',
+        'url(Images/Green.png)',
+        'url(Images/Orange.png)',
+    ];
+    const eightColors = !!localStorage.getItem('eightColors');
+    if (eightColors) {
+        colorsToChooseFrom.splice(2, 0, 'url(Images/Grey.png)');
+        colorsToChooseFrom.splice(5, 0, 'url(Images/Black.png)');
+    }
+    return colorsToChooseFrom;
+}
 function getMarkers(tr) {
     var i,
         color,
-        whites = 0,
-        blacks = 0;
+        reds = 0,
+        whites = 0;
     for (i = 0; i <= $('.selectedColor').length - 1; i++) {
         color = $('.selectedColor').eq(i);
         $(tr)
@@ -24,7 +30,7 @@ function getMarkers(tr) {
                     i == index &&
                     $(this).css('background-image') == $(color).css('background-image')
                 ) {
-                    whites++;
+                    reds++;
                     $(this).addClass('found');
                     $(color).addClass('found');
                 }
@@ -40,25 +46,25 @@ function getMarkers(tr) {
                     !$(this).hasClass('found') &&
                     $(this).css('background-image') == $(color).css('background-image')
                 ) {
-                    blacks++;
+                    whites++;
                     $(this).addClass('found');
                     $(color).addClass('found');
                 }
             });
     }
     $('.selectedColor').removeClass('found');
-    return { whites: whites, blacks: blacks };
+    return { reds, whites};
 }
 function markRow(tr) {
     var markers = getMarkers(tr),
         matches = 0;
-    if (markers.whites) {
-        for (; matches < markers.whites; matches++) {
+    if (markers.reds) {
+        for (; matches < markers.reds; matches++) {
             $(tr).find('.mark').eq(matches).css({
-                'background-color': '#fff',
+                'background-color': '#f00',
             });
         }
-        if (markers.whites == $('.selectedColor').length) {
+        if (markers.reds == $('.selectedColor').length) {
             //win game
             $('#divSelectedColors').show();
             $('.guess').removeClass('editing');
@@ -66,10 +72,10 @@ function markRow(tr) {
             return;
         }
     }
-    if (markers.blacks) {
-        for (; matches < markers.whites + markers.blacks; matches++) {
+    if (markers.whites) {
+        for (; matches < markers.reds + markers.whites; matches++) {
             $(tr).find('.mark').eq(matches).css({
-                'background-color': '#000',
+                'background-color': '#fff',
             });
         }
     }
@@ -129,11 +135,12 @@ function selectColor(tdColor) {
 function generateColors() {
     var gameColors = [];
     var unique = $('#cbUniqueColors:checked').length;
+    const colorsToChooseFrom = getColors();
 
     $('.selectedColor').each(function () {
-        var color = colors[parseInt((Math.random() * 10) % colors.length)];
+        var color = colorsToChooseFrom[parseInt((Math.random() * 10) % colorsToChooseFrom.length)];
         while (unique && gameColors.indexOf(color) != -1) {
-            color = colors[parseInt((Math.random() * 10) % colors.length)];
+            color = colorsToChooseFrom[parseInt((Math.random() * 10) % colorsToChooseFrom.length)];
         }
         gameColors.push(color);
         $(this).css('background-image', color);
@@ -199,16 +206,20 @@ function clear() {
         }
     }
 }
-$(document).ready(function () {
-    var i, tdEdit;
-    for (i = 0; i < colors.length; i++) {
-        $('#trColorPicker').append(
+function loadColors() {
+    const colorsToChooseFrom = getColors();
+    let html = '';
+    for (i = 0; i < colorsToChooseFrom.length; i++) {
+        html +=
             '<td style="background-image:' +
-                colors[i] +
-                '" onclick="selectColor(this);" class="picker">&nbsp;</td>'
-        );
+            colorsToChooseFrom[i] +
+            '" onclick="selectColor(this);" class="picker">&nbsp;</td>';
     }
-    for (i = 0; i < 9; i++) {
+    $('#trColorPicker').html(html);
+}
+$(document).ready(function () {
+    loadColors();
+    for (let i = 0; i < 9; i++) {
         $('#guessTable').append($('#guessTable tr').eq(0).clone());
     }
     $('.tdRowNumber').each(function (index) {
@@ -229,7 +240,13 @@ $(document).ready(function () {
         .change(() =>
             localStorage.setItem('uniqueColors', $('#cbUniqueColors:checked').length ? 'true' : '')
         );
-
+    $('#cbEightColors')
+        .attr('checked', !!localStorage.getItem('eightColors') ? 'checked' : '')
+        .change(() => {
+            const eightColors = !!$('#cbEightColors:checked').length;
+            localStorage.setItem('eightColors', eightColors ? 'true' : '');
+            loadColors();
+        });
     $('tr:has(td.guess)')
         .find('.btnMark')
         .click(function () {
