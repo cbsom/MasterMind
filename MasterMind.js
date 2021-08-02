@@ -3,14 +3,14 @@ function getColors() {
         'url(Images/Yellow.png)',
         'url(Images/Red.png)',
         'url(Images/Blue.png)',
-        'url(Images/Purple.png)',
         'url(Images/Green.png)',
-        'url(Images/Orange.png)',
+        'url(Images/Grey.png)',
+        'url(Images/Black.png)',
     ];
     const eightColors = !!localStorage.getItem('eightColors');
     if (eightColors) {
-        colorsToChooseFrom.splice(2, 0, 'url(Images/Grey.png)');
-        colorsToChooseFrom.splice(5, 0, 'url(Images/Black.png)');
+        colorsToChooseFrom.splice(2, 0, 'url(Images/Purple.png)');
+        colorsToChooseFrom.splice(5, 0, 'url(Images/Orange.png)');
     }
     return colorsToChooseFrom;
 }
@@ -53,7 +53,7 @@ function getMarkers(tr) {
             });
     }
     $('.selectedColor').removeClass('found');
-    return { reds, whites};
+    return { reds, whites };
 }
 function markRow(tr) {
     var markers = getMarkers(tr),
