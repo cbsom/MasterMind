@@ -1,16 +1,8 @@
 function getColors() {
-    const colorsToChooseFrom = [
-        'url(Images/Yellow.png)',
-        'url(Images/Red.png)',
-        'url(Images/Blue.png)',
-        'url(Images/Green.png)',
-        'url(Images/Grey.png)',
-        'url(Images/Black.png)',
-    ];
-    const eightColors = !!localStorage.getItem('eightColors');
-    if (eightColors) {
-        colorsToChooseFrom.splice(2, 0, 'url(Images/Purple.png)');
-        colorsToChooseFrom.splice(5, 0, 'url(Images/Orange.png)');
+    const colorsToChooseFrom = ['Yellow', 'Red', 'Blue', 'Green', 'Grey', 'Black'];
+    if (!!localStorage.getItem('eightColors')) {
+        colorsToChooseFrom.splice(2, 0, 'Purple');
+        colorsToChooseFrom.splice(5, 0, 'Orange');
     }
     return colorsToChooseFrom;
 }
@@ -143,7 +135,7 @@ function generateColors() {
             color = colorsToChooseFrom[parseInt((Math.random() * 10) % colorsToChooseFrom.length)];
         }
         gameColors.push(color);
-        $(this).css('background-image', color);
+        $(this).css('background-image', getColorImage(color));
     });
 }
 function newGame() {
@@ -158,6 +150,9 @@ function newGame() {
     $('.guess:eq(0)').addClass('editing');
     $('#divSelectedColors').hide();
     generateColors();
+}
+function getColorImage(colorName) {
+    return 'url(Images/' + colorName + '.png)';
 }
 function clear() {
     if ($(this).hasClass('editing')) return;
@@ -212,7 +207,7 @@ function loadColors() {
     for (i = 0; i < colorsToChooseFrom.length; i++) {
         html +=
             '<td style="background-image:' +
-            colorsToChooseFrom[i] +
+            getColorImage(colorsToChooseFrom[i]) +
             '" onclick="selectColor(this);" class="picker">&nbsp;</td>';
     }
     $('#trColorPicker').html(html);
