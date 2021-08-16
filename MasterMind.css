@@ -10,6 +10,9 @@ table {
     color: #345;
     font-size: 9pt;
 }
+#guessTable {
+    min-width: 350px;
+}
 td#tdWelcome {
     text-align: left;
 }
