@@ -2,52 +2,65 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 body {
     background-color: #fefefe;
-}
-table {
     font-family: verdana;
     color: #345;
     font-size: 9pt;
 }
+
 #guessTable {
     min-width: 350px;
 }
-td#tdWelcome {
+
+#divMaster {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+}
+
+#divWelcome {
     text-align: left;
 }
-td#tdLinks {
-    text-align: right;
-    float: right;
-}
-td#tdGame {
+
+#divGame {
     text-align: center;
 }
-tr#trColorPicker td {
+
+#divLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-basis: auto;
 }
-div#divAnimate {
+
+#divAnimate {
     display: none;
     position: absolute;
 }
-div.link {
-    font-size: 10pt;
+
+.link {
     color: #555555;
     border: solid 1px silver;
     border-radius: 5px;
-    padding: 3px;
-    width: 100px;
+    padding: 0.45em;
+    max-height: 20px;
+    margin: 0.2em;
     background-color: #f1f1f1;
-    margin: 5px;
     text-decoration: none;
-    display: block;
     text-align: center;
     cursor: pointer;
 }
-div.link:hover {
+
+.link:hover {
     color: blue;
     border-style: outset;
 }
-div.popup {
+
+.popup {
     right: 5px;
     z-index: 100;
     position: absolute;
@@ -58,33 +71,40 @@ div.popup {
     text-align: center;
     border-radius: 10px;
 }
+
 .divOptions p {
     text-align: left;
     margin-bottom: 15px;
 }
+
 .selectedColor {
     height: 60px;
     width: 60px;
     border: inset 1px silver;
 }
+
 .picker {
     height: 100px;
     width: 100px;
     cursor: pointer;
 }
+
 .guess {
     height: 50px;
     width: 50px;
     font-size: 1pt;
 }
+
 .guess.editing {
     background-color: #ddd;
     border-radius: 10px;
 }
+
 #markTable {
     width: 50px;
     margin-left: 30px;
 }
+
 .mark {
     height: 20px;
     border: outset 1px;
@@ -93,13 +113,15 @@ div.popup {
     border-color: #bbb;
     background-color: #ddd;
 }
-span.spnArrow {
+
+.spnArrow {
     font-family: 'Arial Black';
     font-weight: bold;
     color: darkblue;
     display: none;
 }
-button.btnMark {
+
+.btnMark {
     border: solid 1px silver;
     color: dimgray;
     font-family: tahoma;
@@ -108,7 +130,8 @@ button.btnMark {
     visibility: hidden;
     border-radius: 5px;
 }
-button.btnMark:hover {
+
+.btnMark:hover {
     border-style: outset;
     color: blue;
 }
